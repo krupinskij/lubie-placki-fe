@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomePage } from '../pages/homepage/homepage.component';
+import { HomePage } from '../pages/home/home.component';
 import { RandomPage } from '../pages/random/random.component';
 import { NewPage } from '../pages/new/new.component';
 

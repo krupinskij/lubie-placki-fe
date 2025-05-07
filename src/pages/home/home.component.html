@@ -1,0 +1,5 @@
+<article>
+  @for (recipe of recipes; track $index) {
+  <component-card [title]="recipe.title" [img]="recipe.img" />
+  }
+</article>
