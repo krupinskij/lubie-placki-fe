@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #a80000;
+  --color-bg-default: #fff;
+  --color-shadow: #ddd;
+
+  --color-text-primary: #000;
+  --color-text-secondary: #fff;
+
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+
+  --font-sans: "Quicksand", sans-serif;
+
+  --font-bold: 600;
+
+  --font-xs: 0.7rem/1rem var(--font-sans);
+  --font-sm: 0.8rem/1rem var(--font-sans);
+  --font-md: 1rem/1.25rem var(--font-sans);
+  --font-lg: 1.25rem/1.5rem var(--font-sans);
+  --font-xl: 2.5rem/2.75rem var(--font-sans);
+  --font-xxl: 2.5rem/3.25rem var(--font-sans);
+  --font-xxxl: 3rem/4rem var(--font-sans);
+
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

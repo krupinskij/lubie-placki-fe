@@ -1,0 +1,12 @@
+<header>
+  <h1>Lubię Placki</h1>
+  <nav>
+    <ul>
+      @for (item of navItems; track item.name) {
+      <li>
+        <a [href]="item.href">{{ item.name }}</a>
+      </li>
+      }
+    </ul>
+  </nav>
+</header>
