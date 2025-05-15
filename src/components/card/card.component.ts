@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { Recipe } from '../../model';
 
 @Component({
   selector: 'component-card',
@@ -6,6 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './card.component.scss',
 })
 export class Card {
-  title = input('');
-  img = input('');
+  recipe = input<Recipe>();
 }

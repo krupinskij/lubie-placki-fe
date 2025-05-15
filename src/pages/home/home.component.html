@@ -1,5 +1,5 @@
 <article>
-  @for (recipe of recipes; track $index) {
-  <component-card [title]="recipe.title" [img]="recipe.img" />
+  @for (recipe of recipe$ | async; track $index) {
+  <component-card [recipe]="recipe" />
   }
 </article>

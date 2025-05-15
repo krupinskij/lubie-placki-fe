@@ -1,6 +1,11 @@
 <section>
-  <img [src]="[img()]" />
-  <header>
-    {{ title() }}
-  </header>
+  <a [href]="[`recipe/${recipe()?.id}`]">
+    <img [src]="[recipe()?.image]" />
+    <header>
+      <span class="title">{{ recipe()?.title }}</span>
+      <span class="time"
+        >{{ recipe()?.time?.value }} {{ recipe()?.time?.unit }}</span
+      >
+    </header>
+  </a>
 </section>
