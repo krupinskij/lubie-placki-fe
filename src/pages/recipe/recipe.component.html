@@ -1,0 +1,44 @@
+@if (recipe$ | async; as recipe) {
+<article>
+  <header>
+    <h1>{{ recipe.title }}</h1>
+    <span class="time">{{ recipe.time.value }} {{ recipe.time.unit }}</span>
+  </header>
+  <section class="image">
+    <img [src]="[recipe.image]" [alt]="[recipe.title]" />
+  </section>
+  <section class="ingredients">
+    <h2>Składniki</h2>
+    @for (ingredientsGroup of recipe.ingredients; track $index) {
+    <div>
+      @if (ingredientsGroup.title) {
+      <h3>{{ ingredientsGroup.title }}</h3>
+      }
+      <ul>
+        @for (ingredient of ingredientsGroup.ingredients; track $index) {
+        <li>
+          {{ ingredient.name }} - {{ ingredient.quantity }}
+          {{ ingredient.unit }}
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </section>
+  <section class="methods">
+    <h2>Przygotowanie</h2>
+    @for (methodsGroup of recipe.methods; track $index) {
+    <div>
+      @if (methodsGroup.title) {
+      <h3>{{ methodsGroup.title }}</h3>
+      }
+      <ol>
+        @for (method of methodsGroup.methods; track $index) {
+        <li>{{ method }}</li>
+        }
+      </ol>
+    </div>
+    }
+  </section>
+</article>
+}

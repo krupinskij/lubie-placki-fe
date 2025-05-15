@@ -1,6 +1,10 @@
 <section>
-  <a [href]="[`recipe/${recipe()?.id}`]">
-    <img [src]="[recipe()?.image]" />
+  <a
+    [routerLink]="[`recipe/${recipe()?.id}`]"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+  >
+    <img [src]="[recipe()?.image]" [alt]="[recipe()?.title]" />
     <header>
       <span class="title">{{ recipe()?.title }}</span>
       <span class="time"

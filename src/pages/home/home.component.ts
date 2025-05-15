@@ -16,7 +16,6 @@ export class HomePage {
   private recipeService = inject(RecipeService);
 
   constructor() {
-    console.log('Dasda');
     this.recipe$ = this.recipeService.getAllRecipes();
   }
 }

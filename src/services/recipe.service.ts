@@ -10,4 +10,8 @@ export class RecipeService {
   getAllRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`http://localhost:8080/recipes`);
   }
+
+  getRecipe(id: string): Observable<Recipe> {
+    return this.http.get<Recipe>(`http://localhost:8080/recipes/${id}`);
+  }
 }

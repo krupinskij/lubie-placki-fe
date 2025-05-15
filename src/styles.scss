@@ -21,11 +21,12 @@
   --font-xs: 0.7rem/1rem var(--font-sans);
   --font-sm: 0.8rem/1rem var(--font-sans);
   --font-md: 1rem/1.25rem var(--font-sans);
-  --font-lg: 1.25rem/1.5rem var(--font-sans);
+  --font-lg: 1.5rem/2rem var(--font-sans);
   --font-xl: 2.5rem/2.75rem var(--font-sans);
-  --font-xxl: 2.5rem/3.25rem var(--font-sans);
+  --font-xxl: 4rem/4.25rem var(--font-sans);
   --font-xxxl: 3rem/4rem var(--font-sans);
 
+  font: var(--font-md);
   font-family: var(--font-sans);
   color: var(--color-text-primary);
 }
