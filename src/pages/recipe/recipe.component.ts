@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './recipe.component.scss',
 })
 export class RecipePage {
-  route: ActivatedRoute = inject(ActivatedRoute);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   recipe$!: Observable<Recipe>;
   private recipeService = inject(RecipeService);

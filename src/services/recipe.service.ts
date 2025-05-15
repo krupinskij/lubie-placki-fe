@@ -14,4 +14,10 @@ export class RecipeService {
   getRecipe(id: string): Observable<Recipe> {
     return this.http.get<Recipe>(`http://localhost:8080/recipes/${id}`);
   }
+
+  getRandomId(): Observable<{ id: Recipe['id'] }> {
+    return this.http.get<{ id: Recipe['id'] }>(
+      `http://localhost:8080/recipes/random`
+    );
+  }
 }
