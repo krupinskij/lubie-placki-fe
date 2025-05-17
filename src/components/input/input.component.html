@@ -2,8 +2,12 @@
 <label>{{ label }}</label>
 }
 <input
+  [class.invalid]="isInvalid"
   [type]="type()"
   [placeholder]="placeholder()"
   [(ngModel)]="value"
   (input)="onChange(value)"
 />
+@if (isInvalid && errorMessage) {
+<span class="error">{{ errorMessage }}</span>
+}

@@ -9,26 +9,30 @@
         label="Tytuł"
         placeholder="Dodaj tytuł"
         formControlName="title"
+        [control]="getTitle()"
       />
 
-      <group-component formGroupName="time">
+      <div class="time" formGroupName="time">
         <input-component
           label="Czas"
           placeholder="Określ czas"
           type="number"
           formControlName="value"
+          [control]="getTimeValue()"
         />
         <input-component
           label="Jednostka czasu"
           placeholder="Określ jednostkę"
           formControlName="unit"
+          [control]="getTimeUnit()"
         />
-      </group-component>
+      </div>
 
       <input-component
         label="Zdjęcie"
         placeholder="Podaj adres zdjęcia"
         formControlName="image"
+        [control]="getImage()"
       />
     </section>
 
@@ -45,19 +49,32 @@
       @for (ingredientsGroup of getIngredientsGroups().controls; track
       ingredientsGroup.get('id'); let igIdx = $index) {
       <div class="group" [formGroupName]="igIdx">
-        <input-component placeholder="Podaj tytuł" formControlName="title" />
+        <input-component
+          placeholder="Podaj tytuł"
+          formControlName="title"
+          [control]="getIngredientsGroupTitle(igIdx)"
+        />
 
         <div class="items" formArrayName="ingredients">
           @for (ingredient of getIngredients(igIdx).controls; track
           ingredient.get('id'); let iIdx = $index) {
           <div class="item item-ingredient" [formGroupName]="iIdx">
-            <input-component placeholder="Produkt" formControlName="name" />
+            <input-component
+              placeholder="Produkt"
+              formControlName="name"
+              [control]="getIngredientName(igIdx, iIdx)"
+            />
             <input-component
               placeholder="Ilość"
               formControlName="quantity"
               type="number"
+              [control]="getIngredientQuantity(igIdx, iIdx)"
             />
-            <input-component placeholder="Jednostka" formControlName="unit" />
+            <input-component
+              placeholder="Jednostka"
+              formControlName="unit"
+              [control]="getIngredientUnit(igIdx, iIdx)"
+            />
             <button
               type="button"
               class="btn btn-remove-item"
@@ -66,6 +83,8 @@
               - Usuń składnik
             </button>
           </div>
+          }@if (getIngredientsError(igIdx); as error) {
+          <span class="error">{{ error }}</span>
           }
         </div>
 
@@ -82,6 +101,8 @@
           </button>
         </div>
       </div>
+      } @if (getIngredientsGroupsError(); as error) {
+      <span class="error">{{ error }}</span>
       }
     </section>
 
@@ -98,13 +119,21 @@
       @for (methodsGroup of getMethodsGroups().controls; track
       methodsGroup.get('id'); let mgIdx = $index) {
       <div class="group" [formGroupName]="mgIdx">
-        <input-component placeholder="Podaj tytuł" formControlName="title" />
+        <input-component
+          placeholder="Podaj tytuł"
+          formControlName="title"
+          [control]="getMethodsGroupTitle(mgIdx)"
+        />
 
         <div class="items" formArrayName="methods">
           @for (method of getMethods(mgIdx).controls; track method.get('id');
           let mIdx = $index) {
           <div class="item item-method" [formGroupName]="mIdx">
-            <input-component placeholder="Krok" formControlName="text" />
+            <input-component
+              placeholder="Krok"
+              formControlName="text"
+              [control]="getMethodText(mgIdx, mIdx)"
+            />
             <button
               type="button"
               class="btn btn-remove-item"
@@ -113,6 +142,8 @@
               - Usuń krok
             </button>
           </div>
+          } @if (getMethodsError(mgIdx); as error) {
+          <span class="error">{{ error }}</span>
           }
         </div>
 
@@ -125,8 +156,10 @@
           </button>
         </div>
       </div>
+      } @if (getMethodsGroupsError(); as error) {
+      <span class="error">{{ error }}</span>
       }
     </section>
-    <button>Wyślij</button>
+    <button class="btn btn-submit">Wyślij</button>
   </form>
 </article>

@@ -1,9 +1,11 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, computed, forwardRef, input } from '@angular/core';
 import {
   ReactiveFormsModule,
   ControlValueAccessor,
   FormsModule,
   NG_VALUE_ACCESSOR,
+  AbstractControl,
 } from '@angular/forms';
 import { noop } from 'rxjs';
 
@@ -24,6 +26,7 @@ export class InputComponent implements ControlValueAccessor {
   label = input<string>('');
   placeholder = input<string>('');
   type = input<string>('text');
+  control = input<AbstractControl | null>();
 
   value = '';
   disabled = false;
@@ -33,6 +36,7 @@ export class InputComponent implements ControlValueAccessor {
 
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
+    this.control()?.errors;
   }
 
   registerOnTouched(fn: () => void): void {
@@ -45,5 +49,15 @@ export class InputComponent implements ControlValueAccessor {
 
   writeValue(value: string): void {
     this.value = value;
+  }
+
+  get isInvalid() {
+    const ctrl = this.control();
+    return ctrl?.invalid && (ctrl.dirty || ctrl.touched);
+  }
+
+  get errorMessage() {
+    const ctrl = this.control();
+    return ctrl?.errors?.['message'];
   }
 }
