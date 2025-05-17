@@ -7,9 +7,9 @@ article {
 
 header,
 section {
-  width: 640px;
+  width: var(--width-content);
   box-shadow: 4px 4px 4px var(--color-shadow);
-  background-color: var(--color-bg-default);
+  background-color: var(--color-background);
   padding: var(--spacing-4);
 }
 

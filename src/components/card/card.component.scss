@@ -1,6 +1,6 @@
 section {
-  width: 640px;
-  background-color: var(--color-bg-default);
+  width: var(--width-content);
+  background-color: var(--color-background);
   min-height: 420px;
   overflow: hidden;
   position: relative;
@@ -31,7 +31,7 @@ header {
   color: var(--color-text-primary) !important;
   background-color: color-mix(
     in srgb,
-    var(--color-bg-default) 90%,
+    var(--color-background) 90%,
     transparent 10%
   );
 

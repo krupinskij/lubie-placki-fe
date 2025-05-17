@@ -1,1 +1,132 @@
-<div>NEW</div>
+<article>
+  <header>
+    <h1>Dodaj nowy przepis</h1>
+  </header>
+
+  <form [formGroup]="newRecipeForm" (submit)="onSubmit()">
+    <section>
+      <input-component
+        label="Tytuł"
+        placeholder="Dodaj tytuł"
+        formControlName="title"
+      />
+
+      <group-component formGroupName="time">
+        <input-component
+          label="Czas"
+          placeholder="Określ czas"
+          type="number"
+          formControlName="value"
+        />
+        <input-component
+          label="Jednostka czasu"
+          placeholder="Określ jednostkę"
+          formControlName="unit"
+        />
+      </group-component>
+
+      <input-component
+        label="Zdjęcie"
+        placeholder="Podaj adres zdjęcia"
+        formControlName="image"
+      />
+    </section>
+
+    <section formArrayName="ingredientsGroups">
+      <h2>Składniki</h2>
+      <button
+        type="button"
+        class="btn btn-add-group"
+        (click)="addIngredientsGroup()"
+      >
+        + Dodaj nową grupę
+      </button>
+
+      @for (ingredientsGroup of getIngredientsGroups().controls; track
+      ingredientsGroup.get('id'); let igIdx = $index) {
+      <div class="group" [formGroupName]="igIdx">
+        <input-component placeholder="Podaj tytuł" formControlName="title" />
+
+        <div class="items" formArrayName="ingredients">
+          @for (ingredient of getIngredients(igIdx).controls; track
+          ingredient.get('id'); let iIdx = $index) {
+          <div class="item item-ingredient" [formGroupName]="iIdx">
+            <input-component placeholder="Produkt" formControlName="name" />
+            <input-component
+              placeholder="Ilość"
+              formControlName="quantity"
+              type="number"
+            />
+            <input-component placeholder="Jednostka" formControlName="unit" />
+            <button
+              type="button"
+              class="btn btn-remove-item"
+              (click)="removeIngredient(igIdx, iIdx)"
+            >
+              - Usuń składnik
+            </button>
+          </div>
+          }
+        </div>
+
+        <div class="btngr-group">
+          <button
+            type="button"
+            class="btn"
+            (click)="removeIngredientsGroup(igIdx)"
+          >
+            - Usuń grupę
+          </button>
+          <button type="button" class="btn" (click)="addIngredient(igIdx)">
+            + Dodaj kolejny składnik
+          </button>
+        </div>
+      </div>
+      }
+    </section>
+
+    <section formArrayName="methodsGroups">
+      <h2>Przygotowanie</h2>
+      <button
+        type="button"
+        class="btn btn-add-group"
+        (click)="addMethodsGroup()"
+      >
+        + Dodaj nową grupę
+      </button>
+
+      @for (methodsGroup of getMethodsGroups().controls; track
+      methodsGroup.get('id'); let mgIdx = $index) {
+      <div class="group" [formGroupName]="mgIdx">
+        <input-component placeholder="Podaj tytuł" formControlName="title" />
+
+        <div class="items" formArrayName="methods">
+          @for (method of getMethods(mgIdx).controls; track method.get('id');
+          let mIdx = $index) {
+          <div class="item item-method" [formGroupName]="mIdx">
+            <input-component placeholder="Krok" formControlName="text" />
+            <button
+              type="button"
+              class="btn btn-remove-item"
+              (click)="removeMethod(mgIdx, mIdx)"
+            >
+              - Usuń krok
+            </button>
+          </div>
+          }
+        </div>
+
+        <div class="btngr-group">
+          <button type="button" class="btn" (click)="removeMethodsGroup(mgIdx)">
+            - Usuń grupę
+          </button>
+          <button type="button" class="btn" (click)="addMethod(mgIdx)">
+            + Dodaj kolejny krok
+          </button>
+        </div>
+      </div>
+      }
+    </section>
+    <button>Wyślij</button>
+  </form>
+</article>

@@ -1,7 +1,8 @@
 :root {
   --color-primary: #a80000;
-  --color-bg-default: #fff;
+  --color-background: #fff;
   --color-shadow: #ddd;
+  --color-border: #444;
 
   --color-text-primary: #000;
   --color-text-secondary: #fff;
@@ -13,6 +14,8 @@
   --spacing-5: 20px;
   --spacing-6: 24px;
   --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-16: 64px;
 
   --font-sans: "Quicksand", sans-serif;
 
@@ -25,6 +28,8 @@
   --font-xl: 2.5rem/2.75rem var(--font-sans);
   --font-xxl: 4rem/4.25rem var(--font-sans);
   --font-xxxl: 3rem/4rem var(--font-sans);
+
+  --width-content: 640px;
 
   font: var(--font-md);
   font-family: var(--font-sans);
