@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { API } from '../model';
 import { z } from 'zod';
 
-const RandomIdSchema = API.RecipeSchema.pick({ id: true });
+const IdSchema = API.RecipeSchema.pick({ id: true });
 const CreateRecipeSchema = API.RecipeSchema.omit({ id: true, author: true });
 
 @Injectable({ providedIn: 'root' })
@@ -26,14 +26,16 @@ export class RecipeService {
   getRandomId(): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
       .get(`http://localhost:8080/recipes/random`)
-      .pipe(map((r) => RandomIdSchema.parse(r)));
+      .pipe(map((r) => IdSchema.parse(r)));
   }
 
-  postRecipe(recipe: DeepPartial<API.Recipe>): Observable<API.Recipe> {
+  postRecipe(
+    recipe: DeepPartial<API.Recipe>
+  ): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
       .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe), {
         responseType: 'json',
       })
-      .pipe(map((r) => API.RecipeSchema.parse(r)));
+      .pipe(map((r) => IdSchema.parse(r)));
   }
 }
