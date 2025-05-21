@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Card } from '../../components/card/card.component';
 import { RecipeService } from '../../services/recipe.service';
 import { Observable } from 'rxjs';
-import { Recipe } from '../../model';
+import { API } from '../../model';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './home.component.scss',
 })
 export class HomePage {
-  recipe$!: Observable<Recipe[]>;
+  recipe$!: Observable<API.Recipe[]>;
   private recipeService = inject(RecipeService);
 
   constructor() {

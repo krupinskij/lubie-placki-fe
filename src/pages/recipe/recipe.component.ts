@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Recipe } from '../../model';
+import { API } from '../../model';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
@@ -14,7 +14,7 @@ import { AsyncPipe } from '@angular/common';
 export class RecipePage {
   private route: ActivatedRoute = inject(ActivatedRoute);
 
-  recipe$!: Observable<Recipe>;
+  recipe$!: Observable<API.Recipe>;
   private recipeService = inject(RecipeService);
 
   constructor() {

@@ -9,7 +9,7 @@
   </section>
   <section class="ingredients">
     <h2>Składniki</h2>
-    @for (ingredientsGroup of recipe.ingredients; track $index) {
+    @for (ingredientsGroup of recipe.ingredientsGroups; track $index) {
     <div>
       @if (ingredientsGroup.title) {
       <h3>{{ ingredientsGroup.title }}</h3>
@@ -27,14 +27,14 @@
   </section>
   <section class="methods">
     <h2>Przygotowanie</h2>
-    @for (methodsGroup of recipe.methods; track $index) {
+    @for (methodsGroup of recipe.methodsGroups; track $index) {
     <div>
       @if (methodsGroup.title) {
       <h3>{{ methodsGroup.title }}</h3>
       }
       <ol>
         @for (method of methodsGroup.methods; track $index) {
-        <li>{{ method }}</li>
+        <li>{{ method.text }}</li>
         }
       </ol>
     </div>

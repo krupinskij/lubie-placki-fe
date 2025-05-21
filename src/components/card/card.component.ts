@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Recipe } from '../../model';
+import { API } from '../../model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -9,5 +9,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './card.component.scss',
 })
 export class Card {
-  recipe = input<Recipe>();
+  recipe = input<API.Recipe>();
 }

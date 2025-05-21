@@ -28,15 +28,16 @@ export class InputComponent implements ControlValueAccessor {
   type = input<string>('text');
   control = input<AbstractControl | null>();
 
-  value = '';
+  value: string | number = '';
   disabled = false;
 
-  onChange: (value: string) => void = noop;
+  onChange: (value: string | number) => void = noop;
   onTouch: () => void = noop;
 
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-    this.control()?.errors;
+  registerOnChange(fn: (value: string | number) => void): void {
+    this.onChange = (value) => {
+      fn(this.type() === 'number' ? Number(value) : value);
+    };
   }
 
   registerOnTouched(fn: () => void): void {
@@ -47,8 +48,12 @@ export class InputComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  writeValue(value: string): void {
-    this.value = value;
+  writeValue(value: number | string): void {
+    if (this.type() === 'number') {
+      this.value = Number(value);
+    } else {
+      this.value = value;
+    }
   }
 
   get isInvalid() {

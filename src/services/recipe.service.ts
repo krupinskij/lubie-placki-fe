@@ -1,23 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Recipe } from '../model';
+import { map, Observable } from 'rxjs';
+import { API } from '../model';
+import { z } from 'zod';
+
+const RandomIdSchema = API.RecipeSchema.pick({ id: true });
+const CreateRecipeSchema = API.RecipeSchema.omit({ id: true, author: true });
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
   private http = inject(HttpClient);
 
-  getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`http://localhost:8080/recipes`);
+  getAllRecipes(): Observable<API.Recipe[]> {
+    return this.http
+      .get(`http://localhost:8080/recipes`)
+      .pipe(map((r) => z.array(API.RecipeSchema).parse(r)));
   }
 
-  getRecipe(id: string): Observable<Recipe> {
-    return this.http.get<Recipe>(`http://localhost:8080/recipes/${id}`);
+  getRecipe(id: string): Observable<API.Recipe> {
+    return this.http
+      .get(`http://localhost:8080/recipes/${id}`)
+      .pipe(map((r) => API.RecipeSchema.parse(r)));
   }
 
-  getRandomId(): Observable<{ id: Recipe['id'] }> {
-    return this.http.get<{ id: Recipe['id'] }>(
-      `http://localhost:8080/recipes/random`
-    );
+  getRandomId(): Observable<Pick<API.Recipe, 'id'>> {
+    return this.http
+      .get(`http://localhost:8080/recipes/random`)
+      .pipe(map((r) => RandomIdSchema.parse(r)));
+  }
+
+  postRecipe(recipe: DeepPartial<API.Recipe>): Observable<API.Recipe> {
+    return this.http
+      .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe), {
+        responseType: 'json',
+      })
+      .pipe(map((r) => API.RecipeSchema.parse(r)));
   }
 }

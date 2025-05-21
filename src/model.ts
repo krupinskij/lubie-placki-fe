@@ -1,35 +1,50 @@
-export type User = {
-  id: string;
-  username: string;
-};
+import { z } from 'zod';
 
-export type Time = {
-  value: number;
-  unit: string;
-};
+export namespace API {
+  export const UserSchema = z.object({
+    id: z.string(),
+    username: z.string(),
+  });
+  export type User = z.infer<typeof UserSchema>;
 
-export type Ingredient = {
-  name: string;
-  quantity: number;
-  unit: string;
-};
+  export const TimeSchema = z.object({
+    value: z.number(),
+    unit: z.string(),
+  });
+  export type Time = z.infer<typeof TimeSchema>;
 
-export type Ingredients = {
-  title: string;
-  ingredients: Ingredient[];
-};
+  export const IngredientSchema = z.object({
+    name: z.string(),
+    quantity: z.number(),
+    unit: z.string(),
+  });
+  export type Ingredient = z.infer<typeof IngredientSchema>;
 
-export type Methods = {
-  title: string;
-  methods: string[];
-};
+  export const IngredientsGroupSchema = z.object({
+    title: z.string(),
+    ingredients: z.array(IngredientSchema),
+  });
+  export type IngredientsGroup = z.infer<typeof IngredientsGroupSchema>;
 
-export type Recipe = {
-  id: string;
-  title: string;
-  image: string;
-  time: Time;
-  ingredients: Ingredients[];
-  methods: Methods[];
-  author: User;
-};
+  export const MethodSchema = z.object({
+    text: z.string(),
+  });
+  export type Method = z.infer<typeof MethodSchema>;
+
+  export const MethodsGroupSchema = z.object({
+    title: z.string(),
+    methods: z.array(MethodSchema),
+  });
+  export type MethodsGroup = z.infer<typeof MethodsGroupSchema>;
+
+  export const RecipeSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    image: z.string(),
+    time: TimeSchema,
+    ingredientsGroups: z.array(IngredientsGroupSchema),
+    methodsGroups: z.array(MethodsGroupSchema),
+    author: UserSchema,
+  });
+  export type Recipe = z.infer<typeof RecipeSchema>;
+}

@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '../../components/input/input.component';
 
 import * as Validators from './new.validators';
+import { RecipeService } from '../../services/recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-new',
@@ -11,6 +13,9 @@ import * as Validators from './new.validators';
   styleUrl: './new.component.scss',
 })
 export class NewPage {
+  private recipeService = inject(RecipeService);
+  private router = inject(Router);
+
   private formBuilder = inject(FormBuilder);
   newRecipeForm = this.formBuilder.group({
     title: ['', [Validators.required(), Validators.maxStrLength(50)]],
@@ -21,16 +26,16 @@ export class NewPage {
       ],
       unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
     }),
-    image: ['', [Validators.required(), Validators.maxStrLength(100)]],
+    image: ['', [Validators.required(), Validators.maxStrLength(200)]],
     ingredientsGroups: this.formBuilder.array(
       [
         this.formBuilder.group({
-          id: [Math.random()],
+          _id: [Math.random()],
           title: ['', [Validators.required(), Validators.maxStrLength(50)]],
           ingredients: this.formBuilder.array(
             [
               this.formBuilder.group({
-                id: [Math.random()],
+                _id: [Math.random()],
                 name: [
                   '',
                   [Validators.required(), Validators.maxStrLength(50)],
@@ -58,15 +63,15 @@ export class NewPage {
     methodsGroups: this.formBuilder.array(
       [
         this.formBuilder.group({
-          id: [Math.random()],
+          _id: [Math.random()],
           title: ['', [Validators.required(), Validators.maxStrLength(50)]],
           methods: this.formBuilder.array(
             [
               this.formBuilder.group({
-                id: [Math.random()],
+                _id: [Math.random()],
                 text: [
                   '',
-                  [Validators.required(), Validators.maxStrLength(300)],
+                  [Validators.required(), Validators.maxStrLength(500)],
                 ],
               }),
             ],
@@ -144,12 +149,12 @@ export class NewPage {
     const ingredientsGroups = this.getIngredientsGroups();
     ingredientsGroups.push(
       this.formBuilder.group({
-        id: [Math.random()],
+        _id: [Math.random()],
         title: ['', [Validators.required(), Validators.maxStrLength(50)]],
         ingredients: this.formBuilder.array(
           [
             this.formBuilder.group({
-              id: [Math.random()],
+              _id: [Math.random()],
               name: ['', [Validators.required(), Validators.maxStrLength(50)]],
               quantity: [
                 0,
@@ -177,7 +182,7 @@ export class NewPage {
     const ingredients = this.getIngredients(mgIdx);
     ingredients.push(
       this.formBuilder.group({
-        id: [Math.random()],
+        _id: [Math.random()],
         name: ['', [Validators.required(), Validators.maxStrLength(50)]],
         quantity: [
           0,
@@ -233,12 +238,12 @@ export class NewPage {
     const methodsGroups = this.getMethodsGroups();
     methodsGroups.push(
       this.formBuilder.group({
-        id: [Math.random()],
+        _id: [Math.random()],
         title: ['', [Validators.required(), Validators.maxStrLength(50)]],
         methods: this.formBuilder.array(
           [
             this.formBuilder.group({
-              id: [Math.random()],
+              _id: [Math.random()],
               text: ['', [Validators.required(), Validators.maxStrLength(300)]],
             }),
           ],
@@ -257,7 +262,7 @@ export class NewPage {
     const methods = this.getMethods(mgIdx);
     methods.push(
       this.formBuilder.group({
-        id: [Math.random()],
+        _id: [Math.random()],
         text: ['', [Validators.required(), Validators.maxStrLength(300)]],
       })
     );
@@ -273,11 +278,16 @@ export class NewPage {
   }
 
   onSubmit() {
-    if (this.isFormInvalid) {
-      this.newRecipeForm.markAllAsTouched();
-      return;
-    }
+    // if (this.isFormInvalid) {
+    //   this.newRecipeForm.markAllAsTouched();
+    //   return;
+    // }
 
-    console.warn(this.newRecipeForm.value);
+    console.log(this.newRecipeForm.value);
+    this.recipeService
+      .postRecipe(this.newRecipeForm.value)
+      .subscribe(({ id }) => {
+        this.router.navigate([`/recipe/${id}`]);
+      });
   }
 }

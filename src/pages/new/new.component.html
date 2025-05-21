@@ -47,7 +47,7 @@
       </button>
 
       @for (ingredientsGroup of getIngredientsGroups().controls; track
-      ingredientsGroup.get('id'); let igIdx = $index) {
+      ingredientsGroup.get('_id'); let igIdx = $index) {
       <div class="group" [formGroupName]="igIdx">
         <input-component
           placeholder="Podaj tytuł"
@@ -57,7 +57,7 @@
 
         <div class="items" formArrayName="ingredients">
           @for (ingredient of getIngredients(igIdx).controls; track
-          ingredient.get('id'); let iIdx = $index) {
+          ingredient.get('_id'); let iIdx = $index) {
           <div class="item item-ingredient" [formGroupName]="iIdx">
             <input-component
               placeholder="Produkt"
@@ -117,7 +117,7 @@
       </button>
 
       @for (methodsGroup of getMethodsGroups().controls; track
-      methodsGroup.get('id'); let mgIdx = $index) {
+      methodsGroup.get('_id'); let mgIdx = $index) {
       <div class="group" [formGroupName]="mgIdx">
         <input-component
           placeholder="Podaj tytuł"
@@ -126,7 +126,7 @@
         />
 
         <div class="items" formArrayName="methods">
-          @for (method of getMethods(mgIdx).controls; track method.get('id');
+          @for (method of getMethods(mgIdx).controls; track method.get('_id');
           let mIdx = $index) {
           <div class="item item-method" [formGroupName]="mIdx">
             <input-component
