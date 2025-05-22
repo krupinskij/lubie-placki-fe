@@ -5,7 +5,10 @@
     <span class="time">{{ recipe.time.value }} {{ recipe.time.unit }}</span>
   </header>
   <section class="image">
-    <img [src]="[recipe.image]" [alt]="[recipe.title]" />
+    <img
+      [src]="[`http://localhost:8080/images/${recipe.imageId}`]"
+      [alt]="[recipe.title]"
+    />
   </section>
   <section class="ingredients">
     <h2>Składniki</h2>

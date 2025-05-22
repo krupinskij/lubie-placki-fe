@@ -40,7 +40,7 @@ export namespace API {
   export const RecipeSchema = z.object({
     id: z.string(),
     title: z.string(),
-    image: z.string(),
+    imageId: z.string(),
     time: TimeSchema,
     ingredientsGroups: z.array(IngredientsGroupSchema),
     methodsGroups: z.array(MethodsGroupSchema),

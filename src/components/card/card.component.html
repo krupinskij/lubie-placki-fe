@@ -4,7 +4,10 @@
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
   >
-    <img [src]="[recipe()?.image]" [alt]="[recipe()?.title]" />
+    <img
+      [src]="[`http://localhost:8080/images/${recipe()?.imageId}`]"
+      [alt]="[recipe()?.title]"
+    />
     <header>
       <span class="title">{{ recipe()?.title }}</span>
       <span class="time"

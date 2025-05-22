@@ -27,12 +27,12 @@
           [control]="getTimeUnit()"
         />
       </div>
-
       <input-component
         label="Zdjęcie"
-        placeholder="Podaj adres zdjęcia"
+        type="file"
         formControlName="image"
         [control]="getImage()"
+        (change)="onFileSelected($event)"
       />
     </section>
 

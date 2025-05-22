@@ -1,10 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValueChangeEvent,
+} from '@angular/forms';
 import { InputComponent } from '../../components/input/input.component';
 
 import * as Validators from './new.validators';
 import { RecipeService } from '../../services/recipe.service';
 import { Router } from '@angular/router';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'page-new',
@@ -13,6 +19,9 @@ import { Router } from '@angular/router';
   styleUrl: './new.component.scss',
 })
 export class NewPage {
+  formData = new FormData();
+
+  private imageService = inject(ImageService);
   private recipeService = inject(RecipeService);
   private router = inject(Router);
 
@@ -26,7 +35,8 @@ export class NewPage {
       ],
       unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
     }),
-    image: ['', [Validators.required(), Validators.maxStrLength(200)]],
+    image: ['', [Validators.required()]],
+    imageId: [''],
     ingredientsGroups: this.formBuilder.array(
       [
         this.formBuilder.group({
@@ -277,17 +287,30 @@ export class NewPage {
     return this.newRecipeForm.invalid;
   }
 
-  onSubmit() {
-    // if (this.isFormInvalid) {
-    //   this.newRecipeForm.markAllAsTouched();
-    //   return;
-    // }
+  onFileSelected(event: Event) {
+    const target: any = event.target;
+    const file: File = target?.files[0];
 
-    console.log(this.newRecipeForm.value);
-    this.recipeService
-      .postRecipe(this.newRecipeForm.value)
-      .subscribe(({ id }) => {
-        this.router.navigate([`/recipe/${id}`]);
-      });
+    if (file) {
+      this.formData.delete('image');
+      this.formData.append('image', file);
+    }
+  }
+
+  onSubmit() {
+    if (this.isFormInvalid) {
+      this.newRecipeForm.markAllAsTouched();
+      return;
+    }
+
+    this.imageService.uploadImage(this.formData).subscribe(({ id }) => {
+      this.newRecipeForm.get('imageId')?.setValue(id);
+
+      this.recipeService
+        .postRecipe(this.newRecipeForm.value)
+        .subscribe(({ id }) => {
+          this.router.navigate([`/recipe/${id}`]);
+        });
+    });
   }
 }

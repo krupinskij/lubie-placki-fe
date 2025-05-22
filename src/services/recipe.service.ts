@@ -33,9 +33,7 @@ export class RecipeService {
     recipe: DeepPartial<API.Recipe>
   ): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
-      .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe), {
-        responseType: 'json',
-      })
+      .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe))
       .pipe(map((r) => IdSchema.parse(r)));
   }
 }
