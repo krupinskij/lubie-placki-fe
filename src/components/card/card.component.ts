@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'component-card',
+  selector: 'card',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',

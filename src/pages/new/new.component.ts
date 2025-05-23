@@ -1,11 +1,6 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValueChangeEvent,
-} from '@angular/forms';
-import { InputComponent } from '../../components/input/input.component';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Controller } from '../../components/controller/controller.component';
 
 import * as Validators from './new.validators';
 import { RecipeService } from '../../services/recipe.service';
@@ -14,7 +9,7 @@ import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'page-new',
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, Controller],
   templateUrl: './new.component.html',
   styleUrl: './new.component.scss',
 })

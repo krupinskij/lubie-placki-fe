@@ -10,19 +10,19 @@ import {
 import { noop } from 'rxjs';
 
 @Component({
-  selector: 'input-component',
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  selector: 'controller',
+  templateUrl: './controller.component.html',
+  styleUrl: './controller.component.scss',
   imports: [ReactiveFormsModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => Controller),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor {
+export class Controller implements ControlValueAccessor {
   label = input<string>('');
   placeholder = input<string>('');
   type = input<string>('text');

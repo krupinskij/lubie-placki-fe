@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Card } from '../../components/card/card.component';
 import { RecipeService } from '../../services/recipe.service';
 import { map, Observable } from 'rxjs';
@@ -18,25 +18,25 @@ export class HomePage {
   private recipeService = inject(RecipeService);
   private router = inject(Router);
 
-  pagesCount = 0;
-  pagesCurrent = 0;
+  pagesCount = signal(0);
+  pagesCurrent = signal(0);
 
   constructor() {
     const usp = new URLSearchParams(location.search);
     const page = Number(usp.get('page') || 1);
 
-    this.pagesCurrent = page;
+    this.pagesCurrent.set(page);
 
-    this.recipe$ = this.recipeService.getAllRecipes(page);
-
-    this.recipe$.subscribe((r) => {
-      this.pagesCount = r.countPages;
+    effect(() => {
+      this.recipe$ = this.recipeService.getAllRecipes(this.pagesCurrent());
+      this.recipe$.subscribe(({ countPages }) => {
+        this.pagesCount.set(countPages);
+      });
     });
   }
 
   changePage(page: number) {
-    this.pagesCurrent = page;
+    this.pagesCurrent.set(page);
     this.router.navigate([''], { queryParams: { page } });
-    this.recipe$ = this.recipeService.getAllRecipes(page);
   }
 }
