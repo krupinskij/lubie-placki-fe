@@ -34,6 +34,11 @@ ul {
   a:hover {
     text-decoration: underline;
   }
+
+  a[aria-disabled="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
 }
 
 .userInfo {

@@ -16,6 +16,7 @@
           [routerLink]="[item.href]"
           routerLinkActive="active"
           ariaCurrentWhenActive="page"
+          [ariaDisabled]="isDisabled(item)"
           >{{ item.name }}</a
         >
       </li>

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NavItem } from './header.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { API } from '../../model';
 import { AuthService } from '../../services/auth.service';
 import { AsyncPipe } from '@angular/common';
@@ -11,14 +11,17 @@ export const nav: NavItem[] = [
   {
     name: 'Strona Główna',
     href: '/',
+    authenticated: false,
   },
   {
     name: 'Losuj',
     href: '/random',
+    authenticated: false,
   },
   {
     name: 'Dodaj',
     href: '/new',
+    authenticated: true,
   },
 ];
 
@@ -29,16 +32,26 @@ export const nav: NavItem[] = [
   styleUrl: './header.component.scss',
 })
 export class LayoutHeader {
-  me$!: Observable<API.User | null | undefined>;
+  me$!: Observable<API.User | null>;
   private authService = inject(AuthService);
 
+  authenticated: boolean = false;
   navItems = nav;
 
   constructor() {
-    this.me$ = this.authService.getMe();
+    this.me$ = this.authService.getMe().pipe(
+      map((me) => {
+        this.authenticated = !!me;
+        return me;
+      })
+    );
   }
 
   getLink(path: string): string {
     return `${environment.apiUrl}${path}`;
+  }
+
+  isDisabled(item: NavItem): boolean {
+    return item.authenticated && !this.authenticated;
   }
 }
