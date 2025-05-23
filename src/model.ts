@@ -49,4 +49,11 @@ export namespace API {
     author: UserSchema,
   });
   export type Recipe = z.infer<typeof RecipeSchema>;
+
+  export const PaginatedRecipeSchema = z.object({
+    data: z.array(RecipeSchema),
+    count: z.number(),
+    countPages: z.number(),
+  });
+  export type PaginatedRecipe = z.infer<typeof PaginatedRecipeSchema>;
 }

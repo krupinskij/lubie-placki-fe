@@ -1,0 +1,12 @@
+<section>
+  @for (pages of pages(); track $index) {
+  <div>
+    @for (page of pages; track page) {
+    <button (click)="onClick(page)" [ariaCurrent]="isCurrent(page)">
+      {{ page }}
+    </button>
+    }
+  </div>
+  <span>...</span>
+  }
+</section>

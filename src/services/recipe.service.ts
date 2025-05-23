@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { API } from '../model';
-import { z } from 'zod';
 import { environment } from '../environments/environment';
 
 const IdSchema = API.RecipeSchema.pick({ id: true });
@@ -12,10 +11,13 @@ const CreateRecipeSchema = API.RecipeSchema.omit({ id: true, author: true });
 export class RecipeService {
   private http = inject(HttpClient);
 
-  getAllRecipes(): Observable<API.Recipe[]> {
+  getAllRecipes(page: number = 1): Observable<API.PaginatedRecipe> {
     return this.http
-      .get(`${environment.apiUrl}/recipes`, { withCredentials: true })
-      .pipe(map((r) => z.array(API.RecipeSchema).parse(r)));
+      .get(`${environment.apiUrl}/recipes`, {
+        params: { page },
+        withCredentials: true,
+      })
+      .pipe(map((r) => API.PaginatedRecipeSchema.parse(r)));
   }
 
   getRecipe(id: string): Observable<API.Recipe> {
