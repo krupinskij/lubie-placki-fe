@@ -3,9 +3,9 @@
   <span class="userInfo">
     @if (me$ | async; as me) {
     <span>Jesteś zalogowana/y jako {{ me.name }}</span>
-    <a href="http://localhost:8080/auth/logout">Wyloguj się</a>
+    <a [href]="getLink('/auth/logout')">Wyloguj się</a>
     } @else {
-    <a href="http://localhost:8080/auth/login">Zaloguj się</a>
+    <a [href]="getLink('/auth/login')">Zaloguj się</a>
     }
   </span>
   <nav>

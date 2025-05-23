@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { z } from 'zod';
+import { environment } from '../environments/environment';
 
 const IdSchema = z.object({ id: z.string() });
 
@@ -11,7 +12,7 @@ export class ImageService {
 
   uploadImage(formData: FormData): Observable<z.infer<typeof IdSchema>> {
     return this.http
-      .post(`http://localhost:8080/images`, formData, { withCredentials: true })
+      .post(`${environment.apiUrl}/images`, formData, { withCredentials: true })
       .pipe(map((r) => IdSchema.parse(r)));
   }
 }

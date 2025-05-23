@@ -7,7 +7,7 @@
   </header>
   <section class="image">
     <img
-      [src]="[`http://localhost:8080/images/${recipe.imageId}`]"
+      [src]="[getLink(`/images/${recipe.imageId}`)]"
       [alt]="[recipe.title]"
     />
   </section>

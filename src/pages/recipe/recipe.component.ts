@@ -4,6 +4,7 @@ import { API } from '../../model';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'page-recipe',
@@ -20,5 +21,9 @@ export class RecipePage {
   constructor() {
     const id = this.route.snapshot.params['id'];
     this.recipe$ = this.recipeService.getRecipe(id);
+  }
+
+  getLink(path: string): string {
+    return `${environment.apiUrl}${path}`;
   }
 }

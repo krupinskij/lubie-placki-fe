@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { API } from '../../model';
 import { AuthService } from '../../services/auth.service';
 import { AsyncPipe } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 export const nav: NavItem[] = [
   {
@@ -35,5 +36,9 @@ export class LayoutHeader {
 
   constructor() {
     this.me$ = this.authService.getMe();
+  }
+
+  getLink(path: string): string {
+    return `${environment.apiUrl}${path}`;
   }
 }
