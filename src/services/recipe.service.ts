@@ -13,19 +13,19 @@ export class RecipeService {
 
   getAllRecipes(): Observable<API.Recipe[]> {
     return this.http
-      .get(`http://localhost:8080/recipes`)
+      .get(`http://localhost:8080/recipes`, { withCredentials: true })
       .pipe(map((r) => z.array(API.RecipeSchema).parse(r)));
   }
 
   getRecipe(id: string): Observable<API.Recipe> {
     return this.http
-      .get(`http://localhost:8080/recipes/${id}`)
+      .get(`http://localhost:8080/recipes/${id}`, { withCredentials: true })
       .pipe(map((r) => API.RecipeSchema.parse(r)));
   }
 
   getRandomId(): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
-      .get(`http://localhost:8080/recipes/random`)
+      .get(`http://localhost:8080/recipes/random`, { withCredentials: true })
       .pipe(map((r) => IdSchema.parse(r)));
   }
 
@@ -33,7 +33,9 @@ export class RecipeService {
     recipe: DeepPartial<API.Recipe>
   ): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
-      .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe))
+      .post(`http://localhost:8080/recipes`, CreateRecipeSchema.parse(recipe), {
+        withCredentials: true,
+      })
       .pipe(map((r) => IdSchema.parse(r)));
   }
 }

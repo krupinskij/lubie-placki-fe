@@ -1,5 +1,13 @@
 <header>
   <h1>Lubię Placki</h1>
+  <span class="userInfo">
+    @if (me$ | async; as me) {
+    <span>Jesteś zalogowana/y jako {{ me.name }}</span>
+    <a href="http://localhost:8080/auth/logout">Wyloguj się</a>
+    } @else {
+    <a href="http://localhost:8080/auth/login">Zaloguj się</a>
+    }
+  </span>
   <nav>
     <ul>
       @for (item of navItems; track item.name) {

@@ -3,7 +3,9 @@ import { z } from 'zod';
 export namespace API {
   export const UserSchema = z.object({
     id: z.string(),
-    username: z.string(),
+    githubId: z.number(),
+    login: z.string(),
+    name: z.string(),
   });
   export type User = z.infer<typeof UserSchema>;
 

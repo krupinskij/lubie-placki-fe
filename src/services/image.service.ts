@@ -11,7 +11,7 @@ export class ImageService {
 
   uploadImage(formData: FormData): Observable<z.infer<typeof IdSchema>> {
     return this.http
-      .post(`http://localhost:8080/images`, formData)
+      .post(`http://localhost:8080/images`, formData, { withCredentials: true })
       .pipe(map((r) => IdSchema.parse(r)));
   }
 }

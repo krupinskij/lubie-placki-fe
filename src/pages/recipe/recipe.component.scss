@@ -5,6 +5,11 @@ article {
   align-items: center;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+}
+
 header,
 section {
   width: var(--width-content);

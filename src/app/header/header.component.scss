@@ -35,3 +35,17 @@ ul {
     text-decoration: underline;
   }
 }
+
+.userInfo {
+  position: absolute;
+  inset: var(--spacing-2) var(--spacing-2) auto auto;
+  font: var(--font-sm);
+
+  a {
+    color: var(--color-text-primary) !important;
+    margin: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--spacing-1);
+    border: 1px solid var(--color-border);
+  }
+}
