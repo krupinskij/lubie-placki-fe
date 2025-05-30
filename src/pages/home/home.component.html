@@ -2,7 +2,11 @@
   @if (recipe$ | async; as recipes) { @for (recipe of recipes.data; track
   $index) {
   <card [recipe]="recipe" />
-  } }
+  } @empty {
+  <section>Nie ma jeszcze żadnych przepisów.</section>
+  } } @else {
+  <section>Ładowanie...</section>
+  }
   <pagination
     (changePage)="changePage($event)"
     [count]="pagesCount()"
