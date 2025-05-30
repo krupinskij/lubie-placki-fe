@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'random-new',
-  template: '',
+  templateUrl: 'random.component.html',
+  styleUrl: 'random.component.scss',
 })
 export class RandomPage {
   private recipeService = inject(RecipeService);
