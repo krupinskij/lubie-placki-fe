@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { Card } from '../../components/card/card.component';
 import { RecipeService } from '../../services/recipe.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { API } from '../../model';
 import { AsyncPipe } from '@angular/common';
 import { Pagination } from '../../components/pagination/pagination.component';

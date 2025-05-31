@@ -1,4 +1,11 @@
 <layout-header />
+<aside>
+  @for (notification of notifications(); track notification.id) {
+  <div>
+    {{ notification.message }}
+  </div>
+  }
+</aside>
 <main>
   <router-outlet />
 </main>

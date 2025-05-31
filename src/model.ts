@@ -57,3 +57,8 @@ export namespace API {
   });
   export type PaginatedRecipe = z.infer<typeof PaginatedRecipeSchema>;
 }
+
+export type Notification = {
+  id: number;
+  message: string;
+};
