@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API } from '../../model';
-import { RecipeService } from '../../services/recipe.service';
+import { API } from '@model';
+import { RecipeService } from '@services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { environment } from '../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'page-recipe',

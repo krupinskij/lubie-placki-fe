@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { NavItem } from './header.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { API } from '../../model';
-import { AuthService } from '../../services/auth.service';
+import { API } from '@model';
+import { AuthService } from '@services/auth.service';
 import { AsyncPipe } from '@angular/common';
-import { environment } from '../../environments/environment';
+import { environment } from '@environments/environment';
 
 export const nav: NavItem[] = [
   {

@@ -1,8 +1,8 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LayoutHeader } from './header/header.component';
-import { NotificationService } from '../services/notification.service';
-import { Notification } from '../model';
+import { NotificationService } from '@services/notification.service';
+import { Notification } from '@model';
 
 @Component({
   selector: 'app-root',

@@ -1,5 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
-import { calculatePages } from '../../utils';
+import { calculatePages } from '@utils';
 
 @Component({
   selector: 'pagination',

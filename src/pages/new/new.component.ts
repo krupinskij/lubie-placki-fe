@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Controller } from '../../components/controller/controller.component';
+import { Controller } from '@components/controller/controller.component';
 
 import * as Validators from './new.validators';
-import { RecipeService } from '../../services/recipe.service';
+import { RecipeService } from '@services/recipe.service';
 import { Router } from '@angular/router';
-import { ImageService } from '../../services/image.service';
+import { ImageService } from '@services/image.service';
 
 @Component({
   selector: 'page-new',
@@ -24,10 +24,7 @@ export class NewPage {
   newRecipeForm = this.formBuilder.group({
     title: ['', [Validators.required(), Validators.maxStrLength(50)]],
     time: this.formBuilder.group({
-      value: [
-        0,
-        [Validators.required(), Validators.min(1), Validators.max(99999)],
-      ],
+      value: [0, [Validators.required(), Validators.min(1), Validators.max(99999)]],
       unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
     }),
     image: ['', [Validators.required()]],
@@ -41,22 +38,9 @@ export class NewPage {
             [
               this.formBuilder.group({
                 _id: [Math.random()],
-                name: [
-                  '',
-                  [Validators.required(), Validators.maxStrLength(50)],
-                ],
-                quantity: [
-                  0,
-                  [
-                    Validators.required(),
-                    Validators.min(1),
-                    Validators.max(99999),
-                  ],
-                ],
-                unit: [
-                  '',
-                  [Validators.required(), Validators.maxStrLength(10)],
-                ],
+                name: ['', [Validators.required(), Validators.maxStrLength(50)]],
+                quantity: [0, [Validators.required(), Validators.min(1), Validators.max(99999)]],
+                unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
               }),
             ],
             { validators: [Validators.minArrayLength(1)] }
@@ -74,10 +58,7 @@ export class NewPage {
             [
               this.formBuilder.group({
                 _id: [Math.random()],
-                text: [
-                  '',
-                  [Validators.required(), Validators.maxStrLength(500)],
-                ],
+                text: ['', [Validators.required(), Validators.maxStrLength(500)]],
               }),
             ],
             { validators: [Validators.minArrayLength(1)] }
@@ -161,14 +142,7 @@ export class NewPage {
             this.formBuilder.group({
               _id: [Math.random()],
               name: ['', [Validators.required(), Validators.maxStrLength(50)]],
-              quantity: [
-                0,
-                [
-                  Validators.required(),
-                  Validators.min(1),
-                  Validators.max(99999),
-                ],
-              ],
+              quantity: [0, [Validators.required(), Validators.min(1), Validators.max(99999)]],
               unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
             }),
           ],
@@ -189,10 +163,7 @@ export class NewPage {
       this.formBuilder.group({
         _id: [Math.random()],
         name: ['', [Validators.required(), Validators.maxStrLength(50)]],
-        quantity: [
-          0,
-          [Validators.required(), Validators.min(1), Validators.max(99999)],
-        ],
+        quantity: [0, [Validators.required(), Validators.min(1), Validators.max(99999)]],
         unit: ['', [Validators.required(), Validators.maxStrLength(10)]],
       })
     );
@@ -301,11 +272,9 @@ export class NewPage {
     this.imageService.uploadImage(this.formData).subscribe(({ id }) => {
       this.newRecipeForm.get('imageId')?.setValue(id);
 
-      this.recipeService
-        .postRecipe(this.newRecipeForm.value)
-        .subscribe(({ id }) => {
-          this.router.navigate([`/recipe/${id}`]);
-        });
+      this.recipeService.postRecipe(this.newRecipeForm.value).subscribe(({ id }) => {
+        this.router.navigate([`/recipe/${id}`]);
+      });
     });
   }
 }

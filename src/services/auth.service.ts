@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { API } from '../model';
-import { environment } from '../environments/environment';
-import { getErrorMessage } from '../utils';
+import { API } from '@model';
+import { environment } from '@environments/environment';
+import { getErrorMessage } from '@utils';
 import { NotificationService } from './notification.service';
 
 @Injectable({ providedIn: 'root' })

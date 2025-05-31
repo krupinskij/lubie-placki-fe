@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { z } from 'zod';
-import { environment } from '../environments/environment';
+import { environment } from '@environments/environment';
 import { NotificationService } from './notification.service';
-import { getErrorMessage } from '../utils';
+import { getErrorMessage } from '@utils';
 
 const IdSchema = z.object({ id: z.string() });
 

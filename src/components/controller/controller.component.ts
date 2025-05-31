@@ -1,5 +1,4 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, computed, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import {
   ReactiveFormsModule,
   ControlValueAccessor,

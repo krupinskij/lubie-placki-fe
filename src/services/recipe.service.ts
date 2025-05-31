@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { API } from '../model';
-import { environment } from '../environments/environment';
+import { API } from '@model';
+import { environment } from '@environments/environment';
 import { NotificationService } from './notification.service';
-import { getErrorMessage } from '../utils';
+import { getErrorMessage } from '@utils';
 
 const IdSchema = API.RecipeSchema.pick({ id: true });
 const CreateRecipeSchema = API.RecipeSchema.omit({ id: true, author: true });
@@ -53,9 +53,7 @@ export class RecipeService {
       .pipe(map((r) => IdSchema.parse(r)));
   }
 
-  postRecipe(
-    recipe: DeepPartial<API.Recipe>
-  ): Observable<Pick<API.Recipe, 'id'>> {
+  postRecipe(recipe: DeepPartial<API.Recipe>): Observable<Pick<API.Recipe, 'id'>> {
     return this.http
       .post(`${environment.apiUrl}/recipes`, CreateRecipeSchema.parse(recipe), {
         withCredentials: true,
